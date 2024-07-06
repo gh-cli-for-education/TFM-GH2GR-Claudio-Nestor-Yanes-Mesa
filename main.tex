@@ -1,0 +1,111 @@
+\documentclass[spanish,a4paper,12pt,oneside]{extreport}
+\usepackage{lipsum} 
+
+
+% La documentación de overleaf dice que es mejor no hacer esto, pero todo el resto de Internet dice que lo haga así y su alternativa no va.
+\input{system/preamble}
+
+\begin{document}
+
+\renewcommand\listtablename{Índice de Tablas}    
+\renewcommand\listfigurename{Índice de Figuras}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preface
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{content/preface/cover}
+\setlength{\parindent}{5mm}
+\input{content/preface/tutor_certification}
+\input{content/preface/acknowledgements}
+\input{content/preface/license}
+\input{content/preface/abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+%Esto tampoco parece cambiar nada
+%\markboth{\tfgTitle}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Numeracion en romanos
+\renewcommand{\thepage}{\roman{page}}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\tableofcontents
+
+\newpage{\pagestyle{empty}}
+\listoffigures
+
+\newpage{\pagestyle{empty}}
+\listoftables
+
+% Página en blanco
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+\null
+
+% Ajuste de Númeración
+\newpage
+\thispagestyle{empty}
+%Numeracion a partir del capitulo I
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Capitulos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% El primero no puede usar la macro
+\chapter{\LARGE Introducción}
+\label{chapter:intro}
+\input{content/chapter_intro}
+
+\input{acronyms}
+
+\tfgChapter{Objetivos, estado del arte y metodología de trabajo}{metodo_trabajo}{content/chapter_metodo_trabajo}
+\tfgChapter{Diseño del sistema e implementación}{diseno_tec}{content/chapter_diseno_tec}
+\tfgChapter{Modo de empleo}{modo_empleo}{content/chapter_modo_empleo}
+\tfgChapter{Evaluación en un entorno real}{evaluacion_real}{content/chapter_evaluacion_real}
+\tfgChapter{Conclusiones y líneas futuras}{conclusion}{content/chapter_conclusion}
+\tfgChapter{Conclusions and future lines of work}{conclusions}{content/chapter_conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}\cleardoublepage}
+\thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+\bibliography{bibliography}
+\bibliographystyle{ieeetr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+\phantomsection
+\addcontentsline{toc}{chapter}{Glosario}
+\printglossary[type=\acronymtype]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage{\pagestyle{empty}\cleardoublepage}
+\begin{appendix}
+ \chapter{\LARGE Códigos}
+ \label{appendix:code}
+\input{content/appendix_code.tex}
+\end{appendix}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+

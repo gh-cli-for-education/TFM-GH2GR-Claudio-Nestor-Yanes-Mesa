@@ -1,0 +1,52 @@
+\section{Objetivos}
+El presente trabajo tiene como objetivo principal explorar las oportunidades de implementación de la gamificación en el ámbito de la enseñanza de programación y otras especialidades de \acrshort{TI}, centrándose específicamente en el uso de la plataforma GoRace. Se busca aprovechar las ventajas reportadas de la gamificación en este sector para mejorar la experiencia de aprendizaje y fomentar la participación activa de los estudiantes\cite{EmpiricalBenefitProgramming}\cite{ZHAN2022100096}.
+
+Para lograr este propósito, se plantean los siguientes objetivos específicos:
+\begin{enumerate}
+    \item \textbf{Desarrollar un recurso de dominio para GoRace}: Se diseñará y desarrollará un recurso específico para GoRace que permita la extracción de información de las pruebas automáticas creadas por los profesores utilizando Github Classroom. Este recurso facilitará la integración de GoRace en entornos educativos, aprovechando las herramientas familiares para el profesorado y simplificando la implementación de actividades gamificadas.
+    \item \textbf{Evaluar la efectividad y la facilidad de implementación del recurso}: Se realizarán pruebas piloto del recurso desarrollado en entornos educativos reales para evaluar su eficacia en la mejora del proceso de enseñanza-aprendizaje y su facilidad de uso para profesores y estudiantes.
+\end{enumerate}
+
+Al alcanzar estos objetivos, se espera contribuir al avance de la gamificación en la enseñanza de programación y áreas afines, proporcionando a los educadores una herramienta práctica y efectiva para mejorar la motivación y el compromiso de los estudiantes en el proceso de aprendizaje.
+
+\section{Estado del arte}
+Actualmente, hay diversas herramientas diseñadas para ludificar el aprendizaje en el ámbito de la programación, tales como UDPiler\cite{EmpiricalBenefitProgramming} o Dungeons \& Developers\cite{dungeonsanddevelopers}, entre otras. Sin embargo, hasta la fecha de este documento, no se ha identificado ninguna otra herramienta que utilice las ventajas de Github Classroom. Asimismo, no se ha hallado ningún recurso de dominio comparable para GoRace con una funcionalidad similar.
+
+También hemos investigado otras herramientas de gamificación de ámbito más general, similares al papel de GoRace, como BuncBall\cite{biworldwideAboutBunchball} y MEdit4CEP-Gam\cite{MEdit4CEP-Gam}, pero no hemos hallado soluciones que posibiliten enriquecer la experiencia de gamificación con pruebas automáticas de código, y mucho menos que permitan aprovechar las herramientas proporcionadas por Github Classroom para tal propósito.
+
+Al comparar la solución propuesta en este documento con las alternativas, observamos que, aunque puede que no esté tan integrada en el apartado jugable de la experiencia como una solución específica como Dungeons \& Developers, es definitivamente más versátil que sus competidores. Debido a la naturaleza genérica de las pruebas automáticas que soporta, puede ser adaptada para cualquier propósito, lo cual no se puede afirmar de Dungeons \& Developers ni de UDPiler.
+
+\section{Metodología de trabajo}
+El desarrollo de este proyecto siguió una metodología inspirada en AGILE, caracterizada por su flexibilidad, naturaleza iterativa y énfasis en la comunicación y la retroalimentación periódicas. El uso de sprints cortos, de una semana de duración, facilitó ciclos de desarrollo rápidos y la reevaluación frecuente de los objetivos y avances del proyecto.
+
+En este capítulo se describen los procesos y prácticas específicos adoptados a lo largo del ciclo de vida del proyecto.
+\subsection{Planificación y Revisión de Sprints}
+
+\subsubsection{Sprints Semanales}
+El proyecto se organizó en sprints semanales. Cada sprint comenzaba con una reunión entre el director del \acrshort{TFM} y el estudiante, en la cual se realizaban las siguientes actividades:
+
+\begin{enumerate}
+    \item \textbf{Revisión del Sprint Anterior}: Evaluación del trabajo completado durante el sprint anterior. Esto incluía evaluar los logros en comparación con los objetivos del sprint y discutir cualquier desafío encontrado.
+    \item \textbf{Establecimiento de Objetivos}: Definición de objetivos y planificación para el próximo sprint. Esto implicaba identificar tareas clave, establecer prioridades y delinear entregables.
+\end{enumerate}
+
+\subsubsection{Diseño Iterativo y Toma de Decisiones}
+Durante estas reuniones, era habitual cuestionar y revisar decisiones de diseño anteriores. A medida que nuestra comprensión del dominio del proyecto evolucionaba, adaptábamos nuestro enfoque en consecuencia. Este proceso iterativo se vio facilitado por la estructura flexible del proyecto, que nos permitió sustituir las soluciones anteriores por otras mejoradas sin grandes trastornos.
+
+\subsection{Comunicación y Coordinación}
+
+\subsubsection{Interacción con la UCA}
+La coordinación con los responsables de GoRace, es decir, el personal de la Universidad de Cádiz (\acrshort{UCA}), o más en concreto con la doctora Mercedes Ruiz y el doctor Alejandro Calderón, se realizaba según fuera necesario. Estas interacciones no se programaban regularmente, sino que se iniciaban a través de hilos de correo electrónico cuando se estimaba necesario. Esta comunicación ad-hoc aseguraba que abordáramos los problemas de manera oportuna mientras manteníamos el impulso del proyecto y minimizábamos las molestia que podíamos causar al equipo de la UCA.
+
+Ambos doctores mencionados anteriormente fueron muy veloces con sus respuestas y estuvieron siempre disponibles para ayudarnos a entender cualquier detalle de GoRace, solucionar cualquier problema y preparar las distintas carreras. Por todo esto quierp aprovechar la oportunidad para darles las gracias personalmente.
+
+\subsubsection{Falta de Soporte Directo de GitHub Classroom}
+Optamos por no contactar al equipo de GitHub Classroom en busca de soporte o cualquier tipo de ayuda, asumiendo que dicha comunicación probablemente sería improductiva. Esta decisión hizo necesario un enfoque reactivo a cualquier cambio implementado por GitHub. Aunque estos cambios fueron infrecuentes, una alteración significativa -que afectaba el formato de un fichero del cual dependíamos- ocurrió justo antes de una prueba programada con alumnos reales. Cosa que estuvo apunto de imposibilitar dicha prueba, echando por tierra todo el trabajo dedicado a la preparación de la misma.
+
+\subsection{Pruebas y evaluación de los usuarios}
+Los primeros usuarios y evaluadores de nuestro trabajo fueron los alumnos matriculados en la asignatura "Procesadores de Lenguajes" del grado de Ingeniería Informática de la Universidad de La Laguna (\acrshort{ULL}). Estos estudiantes interactuaron con nuestra demo, que había sido en sus integrada en sus tareas curriculares. Tras su participación, recogimos sus comentarios a través de una encuesta para evaluar la efectividad y usabilidad del proyecto.
+
+La demostración se desarrolló alrededor de tareas pre-planeadas para los estudiantes, con énfasis en cumplir con plazos estrictos para no perturbar el cronograma del curso. La coordinación se facilitó por el hecho de que el director del proyecto también servía como profesor coordinador del curso, asegurando una integración y alineación fluidas con los requisitos académicos.
+
+La prueba se desarrolló en torno a tareas que ya se habían planificadas de antemano para los estudiantes y formaban parte de su currículum. La preparación de la misma se hizo con énfasis en cumplir con plazos estrictos para no perturbar el cronograma del curso. La coordinación se facilitó por el hecho de que el director del proyecto también servía como profesor coordinador del curso.
+

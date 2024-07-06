@@ -1,0 +1,131 @@
+\usepackage[dvips]{graphicx}
+\usepackage[dvips]{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{alltt}
+
+\usepackage[ruled,vlined,commentsnumbered,linesnumbered,inoutnumbered,titlenotnumbered,noend]{algorithm2e}
+\SetKwRepeat{Do}{do}{while}
+
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{bigstrut}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{chngpage}
+\usepackage{float}
+\usepackage{enumitem,lipsum}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{microtype}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{ctable}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{gensymb}
+\usepackage{eurosym}
+\usepackage{xcolor}
+\usepackage{tabu}
+\usepackage{lineno}
+\usepackage[newfloat]{minted}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Código Fuente}
+\usepackage{mathtools}
+\usepackage{easy-todo}
+\usepackage{svg}
+\usepackage{glossaries}
+
+\makeglossaries
+
+%\\linenumbers
+%\setlength\linenumbersep{5pt}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily\color{gray}}
+
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\newenvironment{sourcecode}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item\scriptsize\bfseries}
+{\end{list}}
+
+\newenvironment{littlesourcecode}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item\tiny\bfseries}
+{\end{list}}
+
+\newenvironment{summary}
+{\par\noindent\begin{center}\textbf{Abstract}\end{center}\begin{itshape}\par\noindent}
+{\end{itshape}}
+
+\newenvironment{keywords}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item[\hskip\labelsep \bfseries Keywords:]}
+{\end{list}}
+
+\newenvironment{palabrasClave}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item[\hskip\labelsep \bfseries Palabras clave:]}
+{\end{list}}
+
+\usepackage{bera}% optional: just to have a nice mono-spaced font
+\usepackage{listings}
+\usepackage{courier}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\renewcommand{\lstlistingname}{Listado}
+
+
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Common texts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tfgTitle}{GH2GR: Github Classroom como fuente de datos para GoRace}
+\newcommand{\tfgStudentName}{Claudio Néstor Yanes Mesa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\tfgChapter}[3]{
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE #1}
+\label{chapter:#2}
+\input{#3}
+}
