@@ -3,7 +3,7 @@ En este capítulo, ofrecemos una guía completa para configurar y desplegar la i
 El capítulo está estructurado para guiar al usuario a través de cada paso esencial, comenzando por la preparación de la aplicación GitHub, pasando por el proceso de construcción de los componentes cliente y servidor, y concluyendo con el despliegue de todo el sistema. Se asume, tan solo, que el lector ya tiene una carrera configurada en GoRace y una \textit{classroom} creada en GitHub Classroom.
 
 \section{Crear y configurar la GitHub App} \label{title:create-gh-app}
-Se procederá a detallar cómo crear la GitHub App y cómo configurarla propiamente para ser usada por GH2GR. No obstante, la interfaz de GitHub está en constante evolución, por lo que es posible que ciertos procedimientos no se realicen tal y como se explica en este texto si suficiente tiempo ha transcurrido desde el momento en el que se redactó. Por este motivo, es aconsejable no usar esta guía como única referencia y también acudir a la documentación oficial de GitHub.
+Se procederá a detallar cómo crear la GitHub App y cómo configurarla propiamente para ser usada por GH2GR. No obstante, la interfaz de GitHub Classroom está en constante evolución, por lo que es posible que ciertos procedimientos no se realicen tal y como se explica en este texto si suficiente tiempo ha transcurrido desde el momento en el que se redactó. Por este motivo, es aconsejable no usar esta guía como única referencia y también acudir a la documentación oficial de GitHub.
 
 Lo primero que tiene que hacer es ir a la página de perfil de la organización en GitHub con la que creó su \textit{classroom}. Una vez ahí, diríjase a los ajustes de la misma.
 
@@ -29,13 +29,17 @@ En la página en la que nos encontramos, pulsaremos el botón que dice ``New Git
     \caption{Botón para crear una nueva GitHub App.}
 \end{figure}
 
-En el formulario que se nos presenta, introduciremos un nombre que nos parezca adecuado y haremos lo mismo para la dirección de nuestra \textit{homepage}. En ''Callback URL'' introduciremos ''http://127.0.0.1/callback'', desmarcaremos las opciones de ''Expire user authorization tokens'' y ``Request user authorization (OAuth) during installation'' si están seleccionadas, y marcaremos la opción de ''Enable Device Flow''.
+En el formulario que se nos presenta, introduciremos un nombre que nos parezca adecuado y haremos lo mismo para la dirección de nuestra \textit{homepage}. En ''Callback URL'' introduciremos ''{\tt http://127.0.0.1/callback}'', desmarcaremos las opciones de ''{\tt Expire user authorization tokens'}' y ``{\tt Request user authorization (OAuth) during installation}'' si están seleccionadas, y marcaremos la opción de '{\tt 'Enable Device Flow}''.
 
-En el apartado de \textit{webhook} estableceremos la URL a la dirección de la máquina que va a servir GH2GR Server, añadiéndole el protocolo \acrshort{HTTP} o \acrshort{HTTPS} según corresponda y añadiendo ``/hook'' como sufijo. Así pues, si el dominio es ''gh2gr.my-domain.example'' y sirve el contenido por medio de \acrshort{HTTP}, introduciríamos la dirección ``http://gh2gr.my-domain.example/hook''. También en el apartado de \textit{webhook} especificaremos un secreto, que será un texto aleatorio y seguro que debemos recordar para más adelante.
+En el apartado de \textit{webhook} estableceremos la URL a la dirección de la máquina que va a servir GH2GR Server, añadiéndole el protocolo \acrshort{HTTP} o \acrshort{HTTPS} según corresponda y añadiendo ``{\tt /hook}'' como sufijo. Así pues, si el dominio es ''{\tt gh2gr.my-domain.example}'' y sirve el contenido por medio de \acrshort{HTTP}, introduciríamos la dirección `
+
+`{\tt http://gh2gr.my-domain.example/hook}''. 
+
+También en el apartado de \textit{webhook} especificaremos un secreto, que será un texto aleatorio y seguro que debemos recordar para más adelante.
 
 En el apartado de permisos, dentro de los permisos de repositorio, dotaremos a la aplicación de acceso de lectura a ''Actions'', ''Checks'' y ``Metadata''. Luego, más abajo, indicaremos que nos queremos suscribir al evento de ''Workflow job''.
 
-Concluiremos decidiendo si queremos que nuestra aplicación solo pueda ser instalada en nuestra organización o si puede ser instalada en cualquiera. Esta decisión es libre, pero se debe tener en cuenta que la aplicación debe estar instalada en todas las organizaciones donde se quiera usar GH2GR. Una vez elegido, pulsaremos el botón de ''Create GitHub App''.
+Concluiremos decidiendo si queremos que nuestra aplicación solo pueda ser instalada en nuestra organización o si puede ser instalada en cualquiera. Esta decisión es libre, pero se debe tener en cuenta que la aplicación debe estar instalada en todas las organizaciones donde se quiera usar GH2GR. Una vez elegido, pulsaremos el botón de ''{\tt Create GitHub App}''.
 
 \begin{figure}
     \centering
@@ -59,7 +63,7 @@ Concluiremos decidiendo si queremos que nuestra aplicación solo pueda ser insta
 
 Si todo sale bien, ya se habrá creado nuestra GitHub App. Pero nuestro trabajo todavía no ha acabado, pues necesitamos generar la clave secreta que permitirá a GH2GR Server actuar como nuestra GitHub App. Para generar dicha clave, descenderemos en la página que nos ha llevado GitHub hasta llegar al apartado de ''Private Keys''. Cuando lleguemos a él, pulsaremos el botón verde que dice ''Generate a private key''. En cuanto lo pulsemos, se generará una clave y el navegador intentará descargarla, tal como se puede apreciar en la figura \ref{fig:download-secret-key}. Es importante que la guardemos en un lugar seguro, pues la necesitaremos más adelante y no puede volver a ser descargada. No obstante, si la perdemos, siempre podemos pulsar otra vez el botón de ''Generate a private key'' (que se habrá desplazado ligeramente más arriba) y, posteriormente, eliminar la clave anteriormente creada. Esto último tiene que hacerse en este orden, pues GitHub no permite eliminar la única clave privada.
 
-Otra cosa que debemos hacer mientras estamos por esta página es apuntar el ''App ID'' que aparece al principio de la página tal y como se puede ver en la figura \ref{fig:gh-app-id}. Necesitaremos este identificar para configurar nuestro servidor en el aparado \ref{title:config-server}.
+Otra cosa que debemos hacer mientras estamos por esta página es apuntar el ''{\tt App ID}'' que aparece al principio de la página tal y como se puede ver en la figura \ref{fig:gh-app-id}. Necesitaremos este identificar para configurar nuestro servidor en el aparado \ref{title:config-server}.
 
 \begin{figure}
     \centering
@@ -85,7 +89,7 @@ Otra cosa que debemos hacer mientras estamos por esta página es apuntar el ''Ap
 Como ya se comentó en el apartado \ref{title:gh2gr-server-build-and-deploy}, GH2GR Server se construye utilizando contenedores OCI. Por lo tanto, el único software que necesitamos tener instalado en el equipo con el que queremos construir el servidor es un motor de contenedores, específicamente uno capaz de crear imágenes OCI a partir de ficheros Containerfile. En los ejemplos a continuación se usará Podman \cite{podmanWhatPodman}. Sin embargo, esto es una preferencia personal y puede ser sustituido por cualquier otro, como Docker \cite{dockerDockerEngine} o Containerd (nerdctl) \cite{githubGitHubContainerdnerdctl}, por nombrar algunos ejemplos. De hacerlo, se deberán ajustar los comandos a ejecutar para satisfacer cualquier motor que se haya preferido usar. En el caso de Docker y Nerdctl, los comandos son iguales a los de Podman, por lo que solo es necesario cambiar ''podman'' por ''docker'' o ''nerdctl'', según corresponda. Si se desea usar otro motor, descubrir qué comando utilizar se deja como ejercicio al lector.
 
 \begin{sloppypar}
-Para construir la aplicación, nos dirigiremos a la raíz del repositorio de código y ejecutaremos el comando \texttt{podman build -t <usuario>/gh2gr-server -f Containerfile.server .}, sustituyendo ''<usuario>'' por nuestro propio nombre de usuario. Con la ejecución de ese comando, todas las dependencias necesarias serán descargadas, por lo que necesitaremos una conexión a internet, y se construirá una imagen OCI con el binario de GH2GR Server y el entorno mínimo para poder ejecutarlo. Si todo ha salido bien, deberíamos ver una salida similar a la figura \ref{fig:build-server}.
+Para construir la aplicación, nos dirigiremos a la raíz del repositorio de código y ejecutaremos el comando \texttt{podman build -t <usuario>/gh2gr-server -f Containerfile.server .}, sustituyendo ''{\tt <usuario>}'' por nuestro propio nombre de usuario. Con la ejecución de ese comando, todas las dependencias necesarias serán descargadas, por lo que necesitaremos una conexión a internet, y se construirá una imagen OCI con el binario de GH2GR Server y el entorno mínimo para poder ejecutarlo. Si todo ha salido bien, deberíamos ver una salida similar a la figura \ref{fig:build-server}.
 \end{sloppypar}
 
 \begin{figure}[H]
