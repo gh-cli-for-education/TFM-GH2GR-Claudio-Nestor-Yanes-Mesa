@@ -89,7 +89,7 @@ Otra cosa que debemos hacer mientras estamos por esta página es apuntar el ''{\
 Como ya se comentó en el apartado \ref{title:gh2gr-server-build-and-deploy}, GH2GR Server se construye utilizando contenedores OCI. Por lo tanto, el único software que necesitamos tener instalado en el equipo con el que queremos construir el servidor es un motor de contenedores, específicamente uno capaz de crear imágenes OCI a partir de ficheros Containerfile. En los ejemplos a continuación se usará Podman \cite{podmanWhatPodman}. Sin embargo, esto es una preferencia personal y puede ser sustituido por cualquier otro, como Docker \cite{dockerDockerEngine} o Containerd (nerdctl) \cite{githubGitHubContainerdnerdctl}, por nombrar algunos ejemplos. De hacerlo, se deberán ajustar los comandos a ejecutar para satisfacer cualquier motor que se haya preferido usar. En el caso de Docker y Nerdctl, los comandos son iguales a los de Podman, por lo que solo es necesario cambiar ''podman'' por ''docker'' o ''nerdctl'', según corresponda. Si se desea usar otro motor, descubrir qué comando utilizar se deja como ejercicio al lector.
 
 \begin{sloppypar}
-Para construir la aplicación, nos dirigiremos a la raíz del repositorio de código y ejecutaremos el comando \texttt{podman build -t <usuario>/gh2gr-server -f Containerfile.server .}, sustituyendo ''{\tt <usuario>}'' por nuestro propio nombre de usuario. Con la ejecución de ese comando, todas las dependencias necesarias serán descargadas, por lo que necesitaremos una conexión a internet, y se construirá una imagen OCI con el binario de GH2GR Server y el entorno mínimo para poder ejecutarlo. Si todo ha salido bien, deberíamos ver una salida similar a la figura \ref{fig:build-server}.
+Para construir la aplicación, nos dirigiremos a la raíz del repositorio de código y ejecutaremos el comando \texttt{podman build -t <usuario>/gh2gr-server -f Containerfile.server .}, sustituyendo ''<usuario>'' por nuestro propio nombre de usuario. Con la ejecución de ese comando, todas las dependencias necesarias serán descargadas, por lo que necesitaremos una conexión a internet, y se construirá una imagen OCI con el binario de GH2GR Server y el entorno mínimo para poder ejecutarlo. Si todo ha salido bien, deberíamos ver una salida similar a la figura \ref{fig:build-server}.
 \end{sloppypar}
 
 \begin{figure}[H]
@@ -112,7 +112,7 @@ Podemos asegurarnos de que todo ha funcionado correctamente tratando de ejecutar
 Ahora que ya tenemos una imagen funcional del servidor, lo que resta es saber cómo poder transferirla a la máquina servidor que vaya a ser la encargada de servir GH2GR Server. Una opción completamente válida es simplemente construir la imagen directamente en la máquina objetivo y ahorrarse el tener que moverla, ya que no se requiere más software especializado en la máquina que el motor de contenedores que necesita para poder ejecutar la imagen OCI de todas formas. Aun válida, solo contar con esta opción es restrictivo, por eso a continuación se van a enseñar dos métodos para poder distribuir la imagen.
 
 \subsection{Distribución mediante fichero}
-Es posible exportar nuestra imagen OCI a un único fichero tar, el cual luego podremos transferir a donde necesitemos utilizando cualquier método de transferencia de archivos. Para lograr esto, solo tenemos que ejecutar el comando \texttt{podman image save <usuario>/gh2gr-server -o gh2gr-server.tar}. Tras ver una salida como la de la figura \ref{fig:export-oci-image}, contaremos con un archivo ''gh2gr-server.tar'' que podemos llevar a la máquina destino.
+Es posible exportar nuestra imagen OCI a un único fichero tar, el cual luego podremos transferir a donde necesitemos utilizando cualquier método de transferencia de archivos. Para lograr esto, solo tenemos que ejecutar el comando \texttt{podman image save <usuario>/gh2gr-server -o gh2gr-server.tar}. Tras ver una salida como la de la figura \ref{fig:export-oci-image}, contaremos con un archivo ''{\tt gh2gr-server.tar}'' que podemos llevar a la máquina destino.
 
 Una vez en la máquina destino, debemos importar la imagen antes de poder usarla. Esto lo haremos con el comando \texttt{podman image load --input gh2gr-server.tar}, suponiendo que nos encontramos en la misma carpeta que el fichero tar. Tras unos segundos, ya deberíamos contar con la imagen en nuestro sistema y estará lista para ser utilizada. Si queremos asegurarnos, podemos volver a hacer la misma comprobación ejecutando el comando de ayuda que hicimos tras construir la imagen.
 
@@ -225,7 +225,11 @@ Llegados a este punto, ya tenemos nuestro servidor prácticamente listo. Lo úni
 \section{Añadir usuarios y crear credenciales} \label{title:add-user}
 Ahora vamos a proceder a añadir usuarios docentes para que puedan usar GH2GR Server. Esta acción la haremos desde la línea de comandos de la máquina que sirve GH2GR Server.
 \begin{sloppypar}
-El único detalle que necesitaremos conocer de ellos es el nombre de usuario. Una vez nos hemos decidido por uno, podemos agregarlo ejecutando \texttt{podman run --rm -v "/path/to/gh2gr-folder:/data -e GH2GR\_DATABASE\_PATH=/data/gh2gr.sqlite <usuario>/gh2gr-server add-user prueba1}. El comando nos responderá con el ID del usuario, como se puede ver en la figura \ref{fig:add-user}.
+El único detalle que necesitaremos conocer de ellos es el nombre de usuario. Una vez nos hemos decidido por uno, podemos agregarlo ejecutando 
+
+\texttt{podman run --rm -v "/path/to/gh2gr-folder:/data -e GH2GR\_DATABASE\_PATH=/data/gh2gr.sqlite <usuario>/gh2gr-server add-user prueba1}
+
+El comando nos responderá con el ID del usuario, como se puede ver en la figura \ref{fig:add-user}.
 \end{sloppypar}
 
 \begin{figure}
@@ -236,7 +240,11 @@ El único detalle que necesitaremos conocer de ellos es el nombre de usuario. Un
 \end{figure}
 
 \begin{sloppypar}
-Ahora que hemos añadido al usuario, sería conveniente generarle unas credenciales para que pueda iniciar sesión. Esto lo podemos hacer con el comando \texttt{podman run --rm -v "/path/to/gh2gr-folder:/data -e GH2GR\_JWT\_SECRET=very-random-secret -e GH2GR\_DATABASE\_PATH=/data/gh2gr.sqlite <usuario>/gh2gr-server create-user-token prueba1}. El comando nos devolverá inmediatamente el token que el usuario necesita para iniciar sesión desde GH2GR Client, tal y como se puede ver en la figura \ref{fig:create-user-token}.
+Ahora que hemos añadido al usuario, sería conveniente generarle unas credenciales para que pueda iniciar sesión. Esto lo podemos hacer con el comando 
+
+\texttt{podman run --rm -v "/path/to/gh2gr-folder:/data -e GH2GR\_JWT\_SECRET=very-random-secret -e GH2GR\_DATABASE\_PATH=/data/gh2gr.sqlite <usuario>/gh2gr-server create-user-token prueba1}
+
+El comando nos devolverá inmediatamente el token que el usuario necesita para iniciar sesión desde GH2GR Client, tal y como se puede ver en la figura \ref{fig:create-user-token}.
 \end{sloppypar}
 
 \begin{figure}
