@@ -1,8 +1,8 @@
-Como parte de este \acrshort{TFM} se puso a prueba GH2GR en un entorno real. En concreto, se utilizó para lúdificar la actividad de \textit{left-side} de la asignatura de Procesadores de Lenguajes del grado de Ingeniería Informática de la \acrshort{ULL} \cite{ullplNextraNext}. En esta experiencia participaron treinta y siete alumnos, realizando una sola actividad compuesta de cinco variables y doce pruebas de evaluación automatizadas.
+Como parte de este \acrshort{TFM} se puso a prueba GH2GR en un entorno real. En concreto, se utilizó para lúdificar la actividad de \textit{left-side} de la asignatura de Procesadores de Lenguajes del grado de Ingeniería Informática de la \acrshort{ULL}~\cite{ullplNextraNext}. En esta experiencia participaron treinta y siete alumnos, realizando una sola actividad compuesta de cinco variables y doce pruebas de evaluación automatizadas.
 
-Para esta prueba, el GH2GR Server se ejecutó en un \acrshort{VPS} hospedado en la nube de Oracle, más concretamente en su centro de datos de Newport, Reino Unido. En este servidor permaneció ejecutándose GH2GR Server sin interrupción durante el periodo de una semana que duró la carrera. Aunque no estuvo expuesto directamente, sino detrás de un proxy inverso, en concreto detrás de un servidor Caddy \cite{caddyserverWelcomeCaddy}.
+Para esta prueba, el GH2GR Server se ejecutó en un \acrshort{VPS} hospedado en la nube de Oracle, más concretamente en su centro de datos de Newport, Reino Unido. En este servidor permaneció ejecutándose GH2GR Server sin interrupción durante el periodo de una semana que duró la carrera. Aunque no estuvo expuesto directamente, sino detrás de un proxy inverso, en concreto detrás de un servidor Caddy~\cite{caddyserverWelcomeCaddy}.
 
-En el transcurso de la prueba solo se registró una incidencia, aunque incluso esta es difícil de argumentar que fuera realmente culpa de GH2GR. El problema surgió a la hora de ejecutar las pruebas automáticas de evaluación, pues el código de los alumnos no lograba superar las pruebas dentro de la GitHub Action, al contrario de lo que ocurría en los ordenadores de los propios alumnos. La causa del problema resultó ser que la GitHub Action establecía la variable de entorno ``FORCE\_COLOR'', variable que causaba que el código de los alumnos se comportara de formas inesperadas. Que esta variable estuviera configurada era una simple herencia del código original de la acción de autoevaluación de GitHub Classroom sobre el que se basó nuestra GitHub Action y no cumple ningún propósito en nuestra versión modificada. Por este motivo, se decidió eliminar la variable y con eso se solucionó el problema.
+En el transcurso de la prueba solo se registró una incidencia, aunque incluso esta es difícil de argumentar que fuera realmente culpa de GH2GR. El problema surgió a la hora de ejecutar las pruebas automáticas de evaluación, pues el código de los alumnos no lograba superar las pruebas dentro de la GitHub Action, al contrario de lo que ocurría en los ordenadores de los propios alumnos. La causa del problema resultó ser que la GitHub Action establecía la variable de entorno ``{\tt FORCE\_COLOR}'', variable que causaba que el código de los alumnos se comportara de formas inesperadas. Que esta variable estuviera configurada era una simple herencia del código original de la acción de autoevaluación de GitHub Classroom sobre el que se basó nuestra GitHub Action y no cumple ningún propósito en nuestra versión modificada. Por este motivo, se decidió eliminar la variable y con eso se solucionó el problema.
 
 La incidencia se solucionó rápidamente y solo se tiene constancia de que haya afectado a dos alumnos especialmente diligentes.
 
@@ -11,7 +11,7 @@ Más allá de lo comentado, no hubo ningún problema, así que se consideró que
 Me gustaría aprovechar una vez más para agradecer al equipo de la \acrshort{UCA}, con énfasis especial para el doctor Alejandro Calderón Sánchez, por el soporte prestado y la celeridad del mismo, que permitió que esta prueba se llevara a cabo en el ajustado marco de tiempo con el que se contaba.
 
 
-\section{Retroalimentación de los alumnos}
+\section{Retroalimentación de los alumnos}\label{title:feedback}
 
 Tras el experimento, se les sirvió al alumnado una encuesta de satisfacción para observar qué tan contentos (o descontentos) estaban con GH2GR. Elaborar esta encuesta no fue sencillo, pues es complicado preguntar sobre un elemento como GH2GR que hace todo lo posible por ser invisible para los alumnos y transferir la información de una plataforma a la otra con la menor fanfarria posible. Además, había que diseñar una encuesta extremadamente corta y sencilla de rellenar, pues ya habíamos pasado una solicitud al alumnado a petición de GoRace y nos temíamos que una encuesta demasiado larga podría causar rechazo en unos fatigados estudiantes.
 
@@ -39,6 +39,6 @@ Desde luego, la opinión que revela la encuesta es satisfactoria, pero se debe r
         Media            & 4.40 & 3.80 & 4.60 & 4.80 & 4.20 & 4.60 & 4.40 \\
         Desviación media & 0.96 & 0.64 & 0.64 & 0.32 & 0.32 & 0.48 & 0.48
     \end{tabular}
-    \caption{Caption}
+    \caption{Resultado de la encuesta de satisfacción del alumnado con GH2GR. El número de la pregunta corresponde con su posición en la lista del apartado \ref{title:feedback}.}
     \label{tab:encuesta}
 \end{table}

@@ -29,11 +29,9 @@ En la página en la que nos encontramos, pulsaremos el botón que dice ``New Git
     \caption{Botón para crear una nueva GitHub App.}
 \end{figure}
 
-En el formulario que se nos presenta, introduciremos un nombre que nos parezca adecuado y haremos lo mismo para la dirección de nuestra \textit{homepage}. En ''Callback URL'' introduciremos ''{\tt http://127.0.0.1/callback}'', desmarcaremos las opciones de ''{\tt Expire user authorization tokens'}' y ``{\tt Request user authorization (OAuth) during installation}'' si están seleccionadas, y marcaremos la opción de '{\tt 'Enable Device Flow}''.
+En el formulario que se nos presenta, introduciremos un nombre que nos parezca adecuado y haremos lo mismo para la dirección de nuestra \textit{homepage}. En ''Callback URL'' introduciremos ''{\tt http://127.0.0.1/callback}'', desmarcaremos las opciones de ''{\tt Expire user authorization tokens}'' y ``{\tt Request user authorization (OAuth) during installation}'' si están seleccionadas, y marcaremos la opción de '{\tt 'Enable Device Flow}''.
 
-En el apartado de \textit{webhook} estableceremos la URL a la dirección de la máquina que va a servir GH2GR Server, añadiéndole el protocolo \acrshort{HTTP} o \acrshort{HTTPS} según corresponda y añadiendo ``{\tt /hook}'' como sufijo. Así pues, si el dominio es ''{\tt gh2gr.my-domain.example}'' y sirve el contenido por medio de \acrshort{HTTP}, introduciríamos la dirección `
-
-`{\tt http://gh2gr.my-domain.example/hook}''. 
+En el apartado de \textit{webhook} estableceremos la URL a la dirección de la máquina que va a servir GH2GR Server, añadiéndole el protocolo \acrshort{HTTP} o \acrshort{HTTPS} según corresponda y añadiendo ``{\tt /hook}'' como sufijo. Así pues, si el dominio es ''{\tt gh2gr.my-domain.example}'' y sirve el contenido por medio de \acrshort{HTTP}, introduciríamos la dirección ``{\tt http://gh2gr.my-domain.example/hook}''. 
 
 También en el apartado de \textit{webhook} especificaremos un secreto, que será un texto aleatorio y seguro que debemos recordar para más adelante.
 
@@ -86,10 +84,10 @@ Otra cosa que debemos hacer mientras estamos por esta página es apuntar el ''{\
 \end{figure}
 
 \section{Construir y distribuir el servidor}
-Como ya se comentó en el apartado \ref{title:gh2gr-server-build-and-deploy}, GH2GR Server se construye utilizando contenedores OCI. Por lo tanto, el único software que necesitamos tener instalado en el equipo con el que queremos construir el servidor es un motor de contenedores, específicamente uno capaz de crear imágenes OCI a partir de ficheros Containerfile. En los ejemplos a continuación se usará Podman \cite{podmanWhatPodman}. Sin embargo, esto es una preferencia personal y puede ser sustituido por cualquier otro, como Docker \cite{dockerDockerEngine} o Containerd (nerdctl) \cite{githubGitHubContainerdnerdctl}, por nombrar algunos ejemplos. De hacerlo, se deberán ajustar los comandos a ejecutar para satisfacer cualquier motor que se haya preferido usar. En el caso de Docker y Nerdctl, los comandos son iguales a los de Podman, por lo que solo es necesario cambiar ''podman'' por ''docker'' o ''nerdctl'', según corresponda. Si se desea usar otro motor, descubrir qué comando utilizar se deja como ejercicio al lector.
+Como ya se comentó en el apartado \ref{title:gh2gr-server-build-and-deploy}, GH2GR Server se construye utilizando contenedores \acrshort{OCI}. Por lo tanto, el único software que necesitamos tener instalado en el equipo con el que queremos construir el servidor es un motor de contenedores, específicamente uno capaz de crear imágenes \acrshort{OCI} a partir de ficheros Containerfile. En los ejemplos a continuación se usará Podman~\cite{podmanWhatPodman}. Sin embargo, esto es una preferencia personal y puede ser sustituido por cualquier otro, como Docker~\cite{dockerDockerEngine} o Containerd (nerdctl)~\cite{githubGitHubContainerdnerdctl}, por nombrar algunos ejemplos. De hacerlo, se deberán ajustar los comandos a ejecutar para satisfacer cualquier motor que se haya preferido usar. En el caso de Docker y Nerdctl, los comandos son iguales a los de Podman, por lo que solo es necesario cambiar ''podman'' por ''docker'' o ''nerdctl'', según corresponda. Si se desea usar otro motor, descubrir qué comando utilizar se deja como ejercicio al lector.
 
 \begin{sloppypar}
-Para construir la aplicación, nos dirigiremos a la raíz del repositorio de código y ejecutaremos el comando \texttt{podman build -t <usuario>/gh2gr-server -f Containerfile.server .}, sustituyendo ''<usuario>'' por nuestro propio nombre de usuario. Con la ejecución de ese comando, todas las dependencias necesarias serán descargadas, por lo que necesitaremos una conexión a internet, y se construirá una imagen OCI con el binario de GH2GR Server y el entorno mínimo para poder ejecutarlo. Si todo ha salido bien, deberíamos ver una salida similar a la figura \ref{fig:build-server}.
+Para construir la aplicación, nos dirigiremos a la raíz del repositorio de código y ejecutaremos el comando \texttt{podman build -t <usuario>/gh2gr-server -f Containerfile.server .}, sustituyendo ''<usuario>'' por nuestro propio nombre de usuario. Con la ejecución de ese comando, todas las dependencias necesarias serán descargadas, por lo que necesitaremos una conexión a internet, y se construirá una imagen \acrshort{OCI} con el binario de GH2GR Server y el entorno mínimo para poder ejecutarlo. Si todo ha salido bien, deberíamos ver una salida similar a la figura \ref{fig:build-server}.
 \end{sloppypar}
 
 \begin{figure}[H]
@@ -109,10 +107,10 @@ Podemos asegurarnos de que todo ha funcionado correctamente tratando de ejecutar
     \label{fig:server-help}
 \end{figure}
 
-Ahora que ya tenemos una imagen funcional del servidor, lo que resta es saber cómo poder transferirla a la máquina servidor que vaya a ser la encargada de servir GH2GR Server. Una opción completamente válida es simplemente construir la imagen directamente en la máquina objetivo y ahorrarse el tener que moverla, ya que no se requiere más software especializado en la máquina que el motor de contenedores que necesita para poder ejecutar la imagen OCI de todas formas. Aun válida, solo contar con esta opción es restrictivo, por eso a continuación se van a enseñar dos métodos para poder distribuir la imagen.
+Ahora que ya tenemos una imagen funcional del servidor, lo que resta es saber cómo poder transferirla a la máquina servidor que vaya a ser la encargada de servir GH2GR Server. Una opción completamente válida es simplemente construir la imagen directamente en la máquina objetivo y ahorrarse el tener que moverla, ya que no se requiere más software especializado en la máquina que el motor de contenedores que necesita para poder ejecutar la imagen \acrshort{OCI} de todas formas. Aun válida, solo contar con esta opción es restrictivo, por eso a continuación se van a enseñar dos métodos para poder distribuir la imagen.
 
 \subsection{Distribución mediante fichero}
-Es posible exportar nuestra imagen OCI a un único fichero tar, el cual luego podremos transferir a donde necesitemos utilizando cualquier método de transferencia de archivos. Para lograr esto, solo tenemos que ejecutar el comando \texttt{podman image save <usuario>/gh2gr-server -o gh2gr-server.tar}. Tras ver una salida como la de la figura \ref{fig:export-oci-image}, contaremos con un archivo ''{\tt gh2gr-server.tar}'' que podemos llevar a la máquina destino.
+Es posible exportar nuestra imagen \acrshort{OCI} a un único fichero tar, el cual luego podremos transferir a donde necesitemos utilizando cualquier método de transferencia de archivos. Para lograr esto, solo tenemos que ejecutar el comando \texttt{podman image save <usuario>/gh2gr-server -o gh2gr-server.tar}. Tras ver una salida como la de la figura \ref{fig:export-oci-image}, contaremos con un archivo ''{\tt gh2gr-server.tar}'' que podemos llevar a la máquina destino.
 
 Una vez en la máquina destino, debemos importar la imagen antes de poder usarla. Esto lo haremos con el comando \texttt{podman image load --input gh2gr-server.tar}, suponiendo que nos encontramos en la misma carpeta que el fichero tar. Tras unos segundos, ya deberíamos contar con la imagen en nuestro sistema y estará lista para ser utilizada. Si queremos asegurarnos, podemos volver a hacer la misma comprobación ejecutando el comando de ayuda que hicimos tras construir la imagen.
 
@@ -131,7 +129,7 @@ Una vez en la máquina destino, debemos importar la imagen antes de poder usarla
 
 
 \subsection{Distribución mediante un registro de imágenes OCI}
-Un registro de imágenes OCI es un repositorio especializado encargado de almacenar y distribuir imágenes OCI \cite{ociDistribution}. Esto lo hacen siguiendo la especificación de distribución OCI. La principal ventaja que tienen es que los motores de contenedores que implementan la especificación de distribución OCI son capaces de buscar en ellos y descargarse las imágenes adecuadas automáticamente.
+Un registro de imágenes \acrshort{OCI} es un repositorio especializado encargado de almacenar y distribuir imágenes \acrshort{OCI}~\cite{ociDistribution}. Esto lo hacen siguiendo la especificación de distribución \acrshort{OCI}. La principal ventaja que tienen es que los motores de contenedores que implementan la especificación de distribución \acrshort{OCI} son capaces de buscar en ellos y descargarse las imágenes adecuadas automáticamente.
 
 El primer paso es escoger qué registro utilizar, ya que existen múltiples servicios en línea que podemos usar. También, por supuesto, podemos crear el nuestro propio, pero esto se sale del alcance de este documento. Para esta guía, utilizaremos Docker Hub, pero una vez más, el lector puede escoger cualquiera que le satisfaga más.
 
@@ -255,7 +253,7 @@ El comando nos devolverá inmediatamente el token que el usuario necesita para i
 \end{figure}
 
 \section{Construcción del cliente}
-El cliente es una aplicación más sencilla que el servidor y no requiere de CGO, así que nos aventuraremos a compilarla directamente sin usar contenedores. Esto significa que necesitamos tener instalado el SDK de Go en nuestra máquina. Las instrucciones varían según el sistema operativo, pero son sencillas y están disponibles en la página oficial del proyecto \cite{installGo}.
+El cliente es una aplicación más sencilla que el servidor y no requiere de CGO, así que nos aventuraremos a compilarla directamente sin usar contenedores. Esto significa que necesitamos tener instalado el SDK de Go en nuestra máquina. Las instrucciones varían según el sistema operativo, pero son sencillas y están disponibles en la página oficial del proyecto~\cite{installGo}.
 
 Si ya tenemos el SDK instalado, podemos construir la aplicación simplemente yendo a la raíz del repositorio y ejecutando \texttt{go build -o gh2gr cmd/gh2gr-cli/main.go}. Go se encargará de descargar las dependencias externas (cosa que solo hace la primera vez, pero requiere conexión a internet) y compilará nuestro binario con el nombre ``gh2gr''. Podemos probar que funciona correctamente ejecutándolo con \texttt{./gh2gr}. Nos debería devolver una pantalla como la de la Figura \ref{fig:client-root-help}.
 
@@ -360,7 +358,7 @@ Primero nos dirigiremos a GoRaceAdmin y en la barra lateral pulsaremos la opció
     \label{fig:go-admin-add-jwt-value}
 \end{figure}
 
-Una vez cerrado el diálogo de la figura \ref{fig:go-admin-add-jwt-value}, aprovecharemos que seguimos en el apartado de \acrshort{API} de GoRaceAdmin para añadir la IP de nuestro servidor a la lista blanca de IP que pueden interactuar con la \acrshort{API} de GoRace. Para ello, pulsaremos el botón verde que dice ``New IP'' (fig. \ref{fig:go-admin-add-ip-btn}). Al pulsarlo, nos aparecerá una ventana (fig. \ref{fig:go-admin-add-ip-dialog}) que nos pedirá que introduzcamos la IP. Es importante resaltar que tenemos que introducir la IP del servidor que ejecuta GH2GR Server, no la de ningún cliente. Una vez introducida, pulsaremos en añadir. Y listo, podemos comprobar que efectivamente nuestra IP se ha añadido a la lista de IP permitidas, tal y como se ve en la figura \ref{fig:go-admin-add-ip-success}.
+Una vez cerrado el diálogo de la figura \ref{fig:go-admin-add-jwt-value}, aprovecharemos que seguimos en el apartado de \acrshort{API} de GoRaceAdmin para añadir la \acrshort{IP} de nuestro servidor a la lista blanca de \acrshort{IP} que pueden interactuar con la \acrshort{API} de GoRace. Para ello, pulsaremos el botón verde que dice ``New IP'' (fig. \ref{fig:go-admin-add-ip-btn}). Al pulsarlo, nos aparecerá una ventana (fig. \ref{fig:go-admin-add-ip-dialog}) que nos pedirá que introduzcamos la \acrshort{IP}. Es importante resaltar que tenemos que introducir la \acrshort{IP} del servidor que ejecuta GH2GR Server, no la de ningún cliente. Una vez introducida, pulsaremos en añadir. Y listo, podemos comprobar que efectivamente nuestra \acrshort{IP} se ha añadido a la lista de \acrshort{IP} permitidas, tal y como se ve en la figura \ref{fig:go-admin-add-ip-success}.
 
 \begin{figure}
     \begin{subfigure}{0.32\textwidth}

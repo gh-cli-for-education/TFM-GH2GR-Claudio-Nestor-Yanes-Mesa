@@ -1,5 +1,5 @@
 \section{Objetivos}
-El presente trabajo tiene como objetivo principal explorar las oportunidades de implementación de la gamificación en el ámbito de la enseñanza de programación y otras especialidades de \acrshort{TI}, centrándose específicamente en el uso de la plataforma GoRace. Se busca aprovechar las ventajas reportadas de la gamificación en este sector para mejorar la experiencia de aprendizaje y fomentar la participación activa de los estudiantes\cite{EmpiricalBenefitProgramming}\cite{ZHAN2022100096}.
+El presente trabajo tiene como objetivo principal explorar las oportunidades de implementación de la gamificación en el ámbito de la enseñanza de programación y otras especialidades de \acrshort{TI}, centrándose específicamente en el uso de la plataforma GoRace. Se busca aprovechar las ventajas reportadas de la gamificación en este sector para mejorar la experiencia de aprendizaje y fomentar la participación activa de los estudiantes~\cite{EmpiricalBenefitProgramming, ZHAN2022100096}.
 
 Para lograr este propósito, se plantean los siguientes objetivos específicos:
 \begin{enumerate}
@@ -10,16 +10,16 @@ Para lograr este propósito, se plantean los siguientes objetivos específicos:
 Al alcanzar estos objetivos, se espera contribuir al avance de la gamificación en la enseñanza de programación y áreas afines, proporcionando a los educadores una herramienta práctica y efectiva para mejorar la motivación y el compromiso de los estudiantes en el proceso de aprendizaje.
 
 \section{Estado del arte}
-Actualmente, hay diversas herramientas diseñadas para ludificar el aprendizaje en el ámbito de la programación, tales como UDPiler\cite{EmpiricalBenefitProgramming} o Dungeons \& Developers\cite{dungeonsanddevelopers}, entre otras. Sin embargo, hasta la fecha de este documento, no se ha identificado ninguna otra herramienta que utilice las ventajas de Github Classroom. Asimismo, no se ha hallado ningún recurso de dominio comparable para GoRace con una funcionalidad similar.
+Actualmente, hay diversas herramientas diseñadas para ludificar el aprendizaje en el ámbito de la programación, tales como UDPiler~\cite{EmpiricalBenefitProgramming} o Dungeons \& Developers~\cite{dungeonsanddevelopers}, entre otras. Sin embargo, hasta la fecha de este documento, no se ha identificado ninguna otra herramienta que utilice las ventajas de Github Classroom. Asimismo, no se ha hallado ningún recurso de dominio comparable para GoRace con una funcionalidad similar.
 
-También hemos investigado otras herramientas de gamificación de ámbito más general, similares al papel de GoRace, como BuncBall\cite{biworldwideAboutBunchball} y MEdit4CEP-Gam\cite{MEdit4CEP-Gam}, pero no hemos hallado soluciones que posibiliten enriquecer la experiencia de gamificación con pruebas automáticas de código, y mucho menos que permitan aprovechar las herramientas proporcionadas por Github Classroom para tal propósito.
+También hemos investigado otras herramientas de gamificación de ámbito más general, similares al papel de GoRace, como BuncBall~\cite{biworldwideAboutBunchball} y MEdit4CEP-Gam~\cite{MEdit4CEP-Gam}, pero no hemos hallado soluciones que posibiliten enriquecer la experiencia de gamificación con pruebas automáticas de código, y mucho menos que permitan aprovechar las herramientas proporcionadas por Github Classroom para tal propósito.
 
 Al comparar la solución propuesta en este documento con las alternativas, observamos que, aunque puede que no esté tan integrada en el apartado jugable de la experiencia como una solución específica como Dungeons \& Developers, es definitivamente más versátil que sus competidores. Debido a la naturaleza genérica de las pruebas automáticas que soporta, puede ser adaptada para cualquier propósito, lo cual no se puede afirmar de Dungeons \& Developers ni de UDPiler.
 
 \section{Metodología de trabajo}
 El desarrollo de este proyecto siguió una metodología inspirada en AGILE, caracterizada por su flexibilidad, naturaleza iterativa y énfasis en la comunicación y la retroalimentación periódicas. El uso de sprints cortos, de una semana de duración, facilitó ciclos de desarrollo rápidos y la reevaluación frecuente de los objetivos y avances del proyecto.
 
-En este capítulo se describen los procesos y prácticas específicos adoptados a lo largo del ciclo de vida del proyecto.
+En este apartado se describen los procesos y prácticas específicos adoptados a lo largo del ciclo de vida del proyecto.
 \subsection{Planificación y Revisión de Sprints}
 
 \subsubsection{Sprints Semanales}
@@ -41,7 +41,7 @@ La coordinación con los responsables de GoRace, es decir, el personal de la Uni
 Ambos doctores mencionados anteriormente fueron muy veloces con sus respuestas y estuvieron siempre disponibles para ayudarnos a entender cualquier detalle de GoRace, solucionar cualquier problema y preparar las distintas carreras. Por todo esto quiero aprovechar la oportunidad para darles las gracias personalmente.
 
 \subsubsection{Falta de Soporte Directo de GitHub Classroom}
-Optamos por no contactar al equipo de GitHub Classroom en busca de soporte o cualquier tipo de ayuda, asumiendo que nuestras solicitudes tendrían escasas posibilidades de prosperar a corto plazo. Esta decisión hizo necesario un enfoque reactivo a los cambios implementados por el equipo de GitHub Classroom durante el desarrollo de este proyecto. Aunque la mayoría de estos cambios no entraban en conflicto con nuestro desarrollo, debemos mencionar que una alteración significativa que afectaba el formato de un fichero del cual dependíamos ocurrió justo antes de una prueba programada con alumnos reales. Esta incidencia estuvo apunto de imposibilitar dicha prueba, echando por tierra todo el trabajo dedicado a la preparación de la misma. Afortunadamente se pudo encontrar un parche que nos permitió seguir adelante con la prueba sin que los alumnos percibieran error alguno.
+Optamos por no contactar al equipo de GitHub Classroom en busca de soporte o cualquier tipo de ayuda, asumiendo que nuestras solicitudes tendrían escasas posibilidades de prosperar a corto plazo. Esta decisión hizo necesario un enfoque reactivo a los cambios implementados por el equipo de GitHub Classroom durante el desarrollo de este proyecto. Aunque la mayoría de estos cambios no entraban en conflicto con nuestro desarrollo, debemos mencionar que una alteración significativa que afectaba el formato de un fichero del cual dependíamos ocurrió justo antes de una prueba programada con alumnos reales. Esta incidencia estuvo apunto de imposibilitar dicha prueba, echando por tierra todo el trabajo dedicado a la preparación de la misma. Afortunadamente, se pudo encontrar un parche que nos permitió seguir adelante con la prueba sin que los alumnos percibieran error alguno.
 
 \subsection{Pruebas y evaluación de los usuarios}
 
