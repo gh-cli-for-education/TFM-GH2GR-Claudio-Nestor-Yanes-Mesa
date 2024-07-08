@@ -5,7 +5,7 @@ Trabajo Fin de Máster
 ------------------------------------------------------------------------
 
 
-*GH2GR: Github Classroom as a data source for GoRace*\
+*GH2GR: Github Classroom as a data source for GoRace*
 
 ------------------------------------------------------------------------
 
